@@ -39,6 +39,8 @@ def submit_selection(event: dict, actor_id: str, media_ids: list, service_codes:
         raise SelectionError("FORBIDDEN")
     if not isinstance(media_ids, list) or len(media_ids) == 0:
         raise SelectionError("SELECTION_EMPTY")
+    if len(set(media_ids)) != len(media_ids):
+        raise SelectionError("DUPLICATE_MEDIA")
 
     valid_media = _media_ids_of(event)
     for mid in media_ids:
